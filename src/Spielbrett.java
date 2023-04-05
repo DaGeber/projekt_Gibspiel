@@ -6,7 +6,7 @@ public class Spielbrett {
     }
 
     public void startSpiel() {
-        aktuelleAnzahlSteine = (int)(Math.random() * 30);
+        aktuelleAnzahlSteine = (int) (Math.random() * 30);
     }
 
     public boolean macheZug(int anzahlSteine) {

@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class MenschSpieler extends Spieler{
+public class MenschSpieler extends Spieler {
 
     public MenschSpieler(String name) {
         super(name);
