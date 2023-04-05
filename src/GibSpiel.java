@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class GibSpiel {
@@ -36,22 +37,30 @@ public class GibSpiel {
                 Spieler spieler1 = new MenschSpieler(eingabe.next());
                 System.out.print("Name des Spieler 2: ");
                 Spieler spieler2 = new MenschSpieler(eingabe.next());
-                spielBeginnen(spieler1, spieler2);
+                randomBeginn(spieler1, spieler2);
                 break;
             case 2:
                 System.out.print("Name des Spieler 1: ");
                 Spieler spieler3 = new MenschSpieler(eingabe.next());
                 Spieler computer = new ComputerSpieler("ComputerSpieler 1");
-                spielBeginnen(spieler3, computer);
+                randomBeginn(spieler3, computer);
                 break;
             case 3:
                 Spieler computer1 = new ComputerSpieler("ComputerSpieler 1");
                 Spieler computer2 = new ComputerSpieler("ComputerSpieler 2");
-                spielBeginnen(computer1,computer2);
+                randomBeginn(computer1,computer2);
                 break;
         }
     }
 
+    private static void randomBeginn(Spieler spieler1, Spieler spieler2) {
+        Random radom = new Random();
+        int zufall = radom.nextInt(1,10);
+        if (zufall % 2 == 0) {
+            spielBeginnen(spieler1,spieler2);
+        }else spielBeginnen(spieler2,spieler1);
+
+    }
     private static void spielBeginnen(Spieler spieler1, Spieler spieler2) {
         Spielbrett spielbrett = new Spielbrett();
         spielbrett.startSpiel();

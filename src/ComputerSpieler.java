@@ -5,23 +5,41 @@ public class ComputerSpieler extends Spieler{
     public ComputerSpieler(String name) {
         super(name);
     }
-    Random zufall = new Random();
+//  Random zufall = new Random();
     public void setAktuelleAnzahlElemente(int aktuelleAnzahlElemente) {
         this.aktuelleAnzahlElemente = aktuelleAnzahlElemente;
     }
 
     @Override
     public int steineSetzen() {
-        int zufallsZahl = zufall.nextInt(1,10);;
+        int legeZahl;
         System.out.println("Am Zug: " + getName());
-        if (aktuelleAnzahlElemente < 88 && aktuelleAnzahlElemente > 77)
-        System.out.println("Ihre Wahl (1-10): " + zufallsZahl);
+        System.out.print("Ihre Wahl (1-10): ");
+        if (aktuelleAnzahlElemente == 87){
+            System.out.println("2");
+            legeZahl = 2;
+        } else if (aktuelleAnzahlElemente % 10 == 7 && aktuelleAnzahlElemente < 90) {
+            System.out.println("10");
+            legeZahl = 10;
+        } else if (aktuelleAnzahlElemente > 90) {
+            legeZahl = 100 - aktuelleAnzahlElemente;
+            System.out.println(legeZahl);
+        } else {
+            int rest = aktuelleAnzahlElemente % 10;
+            if (rest < 7){
+                legeZahl = 7 - rest;
+                System.out.println(legeZahl);
+            } else {
+                legeZahl = 17 - rest;
+                System.out.println(legeZahl);
+            }
+        }
         try {
-            Thread.sleep(500);
+            Thread.sleep(600);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        return zufallsZahl;
+        return legeZahl;
     }
 
 }
