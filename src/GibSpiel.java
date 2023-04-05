@@ -20,12 +20,39 @@ public class GibSpiel {
     public static void main(String[] args) {
         // Erster Setup für zwei menschliche Spieler
         Scanner eingabe = new Scanner(System.in);
-        System.out.print("Name des Spieler 1: ");
-        Spieler spieler1 = new MenschSpieler(eingabe.next());
 
-        System.out.print("Name des Spieler 2: ");
-        Spieler spieler2 = new ComputerSpieler(eingabe.next());
 
+        System.out.println("1. Zweispieler");
+        System.out.println("2. VS. PC");
+        System.out.println("3. PC vs. PC");
+        System.out.println("0. Beenden");
+        int auswahl = eingabe.nextInt();
+        switch (auswahl) {
+            case 0:
+                System.out.println("Spiel wurde beendet");
+                break;
+            case 1:
+                System.out.print("Name des Spieler 1: ");
+                Spieler spieler1 = new MenschSpieler(eingabe.next());
+                System.out.print("Name des Spieler 2: ");
+                Spieler spieler2 = new MenschSpieler(eingabe.next());
+                spielBeginnen(spieler1, spieler2);
+                break;
+            case 2:
+                System.out.print("Name des Spieler 1: ");
+                Spieler spieler3 = new MenschSpieler(eingabe.next());
+                Spieler computer = new ComputerSpieler("ComputerSpieler 1");
+                spielBeginnen(spieler3, computer);
+                break;
+            case 3:
+                Spieler computer1 = new ComputerSpieler("ComputerSpieler 1");
+                Spieler computer2 = new ComputerSpieler("ComputerSpieler 2");
+                spielBeginnen(computer1,computer2);
+                break;
+        }
+    }
+
+    private static void spielBeginnen(Spieler spieler1, Spieler spieler2) {
         Spielbrett spielbrett = new Spielbrett();
         spielbrett.startSpiel();
 
@@ -47,6 +74,9 @@ public class GibSpiel {
     private static void zug(Spieler spieler, Spielbrett spielbrett) {
         int anzahlSteine;
         do {
+            if (spieler instanceof ComputerSpieler) {
+                ((ComputerSpieler) spieler).setAktuelleAnzahlElemente(spielbrett.getAktuelleAnzahlSteine());
+            }
             anzahlSteine = spieler.steineSetzen();
         } while (!spielbrett.macheZug( anzahlSteine ));
     }
